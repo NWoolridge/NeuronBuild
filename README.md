@@ -8,8 +8,10 @@ version date: March 11 2013
 
 A script to import swc files downloaded from neuromorpho.org, and create accurate
 spline-based models of neuronal structure. The original swc file format is detailed here:
+
 Cannon, R.C, Turner, D.A, Pyapali, G.K, Wheal, H.V. An on-line archive of reconstructed
 hippocampal neurons. Journal of Neuroscience Methods. 84 1–2. pp 49-54. 1998
+
 The reconstruction units are μm (micrometers).
 Note: soma (cell body) definitions vary from file to file; this script assumes a three point spline
 (which is very common). The soma object is disabled by default, since they rarely produce acceptable geometry.
