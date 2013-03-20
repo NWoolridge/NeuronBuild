@@ -1,9 +1,9 @@
-AutoNeuron
+NeuronBuild
 ==========
 
 A script to import Neuromorpho data into 3D apps like Cinema 4D
 
-AutoNeuron | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
+NeuronBuild | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
 version date: March 11 2013
 
 A script to import swc files downloaded from neuromorpho.org, and create accurate
@@ -21,7 +21,7 @@ How to use:
 - add to your C4D scripts folder (on Mac OS X: Applications/MAXON/CINEMA 4D R14/library/scripts or in the user prefs folder)
 - Browse and download a .swc or .swc.txt file from http://neuromorpho.org/
 - Open the script manager in C4D, the script should be in the pop-up menu at the top of the window.
-- In the Script manager in C4D load the AutoNeuron script and click "Execute".
+- In the Script manager in C4D load the NeuronBuild script and click "Execute".
 - An import options dialog should appear; choose options for imported geometry, and click "Import File".
 - In the open file dialog, choose the swc file and click "OK".
 - A neuron should appear in your viewport.
