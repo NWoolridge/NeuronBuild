@@ -411,11 +411,11 @@ class SettingsDlg(gui.GeDialog):
     def InitValues(self):
         #initiate the gadgets with values
         if versionNumber >= 13000:
-            self.SetString(TEXTBOX, "The AutoNeuron script imports accurate neuromorpho SWC files "\
+            self.SetString(TEXTBOX, "The NeuronBuild script imports accurate neuromorpho SWC files "\
             "and creates spline-based geometry (scale assumes µm as world unit). Choose modeling options below; " \
             "if all boxes are unchecked, only the base splines will be added to the scene.")
         else:
-            self.SetString(TEXTBOX, "The AutoNeuron script imports\naccurate neuromorpho SWC files\n"\
+            self.SetString(TEXTBOX, "The NeuronBuild script imports\naccurate neuromorpho SWC files\n"\
                            "and creates spline-based geometry\n(scale assumes µm as world unit).\nChoose modeling options below;\n" \
                            "if all boxes are unchecked, only\nthe base splines will be added to\nthe scene.")
         self.result = True
