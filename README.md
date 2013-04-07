@@ -38,3 +38,5 @@ New in 1.4:
     – support for Cinema 4D r12 and r13 (Oconnect and AddMultiLineEditText compatibility
     – convert right handed .swc data to Cinema 4D left-handed with coordSystem test
     – added safety test if user hits cancel button while in the system browser. Reports as 'Cancelled in Browser.'
+
+Graham was here on April 6 at 9:49pm PST
