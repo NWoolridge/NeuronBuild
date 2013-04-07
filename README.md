@@ -40,3 +40,4 @@ New in 1.4:
     – added safety test if user hits cancel button while in the system browser. Reports as 'Cancelled in Browser.'
 
 Graham was here on April 6 at 9:49pm PST
+He stopped by again at 10:58pm to commit a second node on the uPy branch
