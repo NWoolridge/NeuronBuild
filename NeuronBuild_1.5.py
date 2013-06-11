@@ -319,9 +319,12 @@ def readFile(path):
     doc.AddUndo(c4d.UNDOTYPE_NEW, Null)
     c4d.EventAdd()
     
-    #call the functions that build the soma and other splines
-    somaMake(somaLines, neuroFile, fileName)
-    splineMake(splineLines, neuroFile, fileName)
+    #call the functions that build the soma and other splines, if applicable
+    if len(somaLines) > 0:
+        somaMake(somaLines, neuroFile, fileName)
+        
+    if len(splineLines) > 0:
+        splineMake(splineLines, neuroFile, fileName)
     
     #create connect object
     if DoConnect == True:
