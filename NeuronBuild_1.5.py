@@ -153,6 +153,12 @@ def splineMake(splineLines, neuroFile, fileName):
         sRoot = int(currLine[6])
         if sIndex > sRoot + 1:
             splineSep.append(sIndex)
+
+    #ensures that the final spline is included in the drawing
+    finalIndex = int(splineLines[len(splineLines)-1][0])
+
+    if finalIndex not in splineSep:
+        splineSep.append(finalIndex)
             
     #now build the spline segments as separate splines
     for n in range(0, len(splineSep)):
@@ -160,6 +166,10 @@ def splineMake(splineLines, neuroFile, fileName):
             
             #determine the offset between segemnts; this is the number of vertices in each spline segment
             offset = splineSep[n+1] - splineSep[n]
+
+            #ensures that the final point is included in the drawing
+            if splineSep[n+1] == finalIndex:
+                offset = offset+1
             
             #create an empty spline
             Spline = c4d.BaseObject(c4d.Ospline)
