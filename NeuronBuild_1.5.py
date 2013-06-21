@@ -165,11 +165,15 @@ def splineMake(splineLines, neuroFile, fileName):
         if n < (len(splineSep) - 1):
             
             #determine the offset between segemnts; this is the number of vertices in each spline segment
-            offset = splineSep[n+1] - splineSep[n]
+            offset = splineSep[n+1] - splineSep[n] + 1
 
             #ensures that the final point is included in the drawing
             if splineSep[n+1] == finalIndex:
-                offset = offset+1
+                offset = offset + 1
+
+            #special case: if the spline is not rooted, one fewer point
+            if int(neuroFile[splineSep[n]-1][6]) < 0:
+                offset = offset - 1
             
             #create an empty spline
             Spline = c4d.BaseObject(c4d.Ospline)
@@ -178,7 +182,7 @@ def splineMake(splineLines, neuroFile, fileName):
             Spline.ResizeObject(offset)
             
             #get the data line that starts the segment
-            splineStart = neuroFile[splineSep[n]]
+            splineStart = neuroFile[splineSep[n]-1]
             splineType = int(splineStart[1])
                         
             #determine what type of spline it is and name it
@@ -194,19 +198,27 @@ def splineMake(splineLines, neuroFile, fileName):
             
             #find the root poiont for this segment by going back to 
             #the line in neuroFile that contains it
-            #and then we have to step back one line in the source file
-            rootLine = neuroFile[((int(splineStart[6])) - 1)]
-            rootRoot = neuroFile[int(rootLine[6]) - 1]
-            x, y, z = float(rootRoot[2]), float(rootRoot[3]), float(rootRoot[4])
+            #if the point is unrooted, let it be 'its own root'
+            if int(splineStart[6]) >= 0:
+                rootLine = neuroFile[((int(splineStart[6])) - 1)]
+            else:
+                rootLine = splineStart
+                
+            x, y, z = float(rootLine[2]), float(rootLine[3]), float(rootLine[4])
             rootPos = c4d.Vector(x, y, z)
             if coordsystem=="left":  #Convert to left-hand for C4D added by GJ March 11, 2013
                 rootPos = c4d.Vector(x, y, -z)
             Spline.SetPoint(0, rootPos)
             
             for m in range(1, offset):
-                l = int(splineSep[n]) + (m - 1)
+                l = int(splineSep[n]) + (m - 2)
+                                   
+                #correction to account for difference in unrooted points
+                if rootLine == splineStart:
+                    l = l + 1
+                    
                 currLine = neuroFile[l]
-                
+                    
                 #create the variables for positioning the points
                 sx = float(currLine[2])
                 sy = float(currLine[3])
@@ -228,15 +240,21 @@ def splineMake(splineLines, neuroFile, fileName):
                 railSpline = Spline.GetClone()
                 railSpline[c4d.ID_BASELIST_NAME] = name + " Rail"
                 
-                rVector = c4d.Vector((x + (float(rootRoot[5]))), y, z)
+                rVector = c4d.Vector((x + (float(rootLine[5]))), y, z)
                 if coordsystem == "left":  #Convert to left-hand for C4D added by GJ March 11, 2013
-                    rVector = c4d.Vector((x + (float(rootRoot[5]))), y, -z)
+                    rVector = c4d.Vector((x + (float(rootLine[5]))), y, -z)
 
                 railSpline.SetPoint(0, rVector)
                 for m in range(1, offset):
-                    l = int(splineSep[n]) + (m - 1)
-                    currLine = neuroFile[l]
+                    l = int(splineSep[n]) + (m - 2)
+
+                                       
+                    #correction to account for difference in unrooted points
+                    if rootLine == splineStart:
+                        l = l + 1
                     
+                    currLine = neuroFile[l]
+ 
                     #create the variables for positioning the points
                     sRad = float(currLine[5])
                     #add the radius to the x coord this time
