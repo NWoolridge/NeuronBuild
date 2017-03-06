@@ -1,11 +1,12 @@
 NeuronBuild
 ==========
 
-A script to import Neuromorpho data into 3D apps like Cinema 4D
+Scripts to import neuron morphology data (from neuromorpho.org) into Cinema 4D and ZBrush.
 
+Cinema 4D 
 The current working version is 1.5. Version 1.6 is experimental, and not yet fully functional.
 
-NeuronBuild | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
+NeuronBuild C4D | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
 version date: March 11 2013
 
 A script to import swc files downloaded from neuromorpho.org, and create accurate
@@ -43,3 +44,18 @@ New in 1.4:
 
 Graham was here on April 6 at 9:49pm PST
 He stopped by again at 10:58pm to commit a second node on the uPy branch
+
+ZBrush
+The current version is 1.2.
+
+NeuronBuild ZBrush | 2017 Nicholas Woolridge & Marcus Burgess | n.woolridge@utoronto.ca
+
+version date: March 2017
+
+How to use:
+- In ZBrush, use Menus > ZScript > Load; navigate your file system to find the script file, select it, and click on "Open"
+- A button called "Import_Neuromorpho_SWC_File" will appear in the tutorial palette; the tutorial palette is just below the viewport. Drag the divider up to see the button.
+- Depending upon the complexity and size of the file, parsing the file can take some time; a note will appear indicating the number of lines in the file, then the zsphere construction will occur. It may appear that ZBrush has frozen, but be patient.
+- PLEASE NOTE: to generate a mesh from a zsphere model, one would normally use the adaptive skin function. We have found that users should choose the "Use Classic Skinning" option in the Adaptive skin settings, otherwise ZBrush may crash.
+
+If you use this script, please consider posting the results of your work in the ZBrush forums at: http://www.zbrushcentral.com/zbcinfinite.php
