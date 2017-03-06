@@ -7,7 +7,7 @@ Scripts to import neuron morphology data (from neuromorpho.org) into Cinema 4D a
 The current working version is 1.5. Version 1.6 is experimental, and not yet fully functional.
 
 NeuronBuild C4D | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
-version date: March 11 2013
+Version date: March 2013
 
 A script to import swc files downloaded from neuromorpho.org, and create accurate
 spline-based models of neuronal structure. The original swc file format is detailed here:
