@@ -3,6 +3,8 @@ NeuronBuild
 
 A script to import Neuromorpho data into 3D apps like Cinema 4D
 
+The current working version is 1.5. Version 1.6 is experimental, and not yet fully functional.
+
 NeuronBuild | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
 version date: March 11 2013
 
