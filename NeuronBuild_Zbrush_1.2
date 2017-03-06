@@ -1,0 +1,198 @@
+// NeuronBuild | | 2017 Nicholas Woolridge & Marcus Burgess | n.woolridge@utoronto.ca
+// version date: March 2017
+// A script to import swc files downloaded from neuromorpho.org, and create accurate
+// zsphere-based models of neuronal structure in ZBrush. 
+
+// The original swc file format is detailed here:
+// Cannon, R.C, Turner, D.A, Pyapali, G.K, Wheal, H.V. An on-line archive of reconstructed
+// hippocampal neurons. Journal of Neuroscience Methods. 84 1–2. pp 49-54. 1998
+// The reconstruction units are μm (micrometers).
+// Note: soma (cell body) definitions vary from file to file; this script assumes a three point
+// spline (which is very common).
+// Note: use of neuromorpho files may come with an obligation to cite the original publication.
+
+// How to use:
+// - In ZBrush, use Menus > ZScript > Load; navigate your file system to find the script file, select it, and click on "Open"
+// - A button called "Import_Neuromorpho_SWC_File" will appear in the tutorial palette; the 
+// tutorial palette is just below the viewport. Drag the divider up to see the button.
+// - Depending upon the complexity and size of the file, parsing the file can take some time; a note will appear indicating the number of lines in the file, then the zsphere construction will occur. It may appear that ZBrush has frozen, but be patient.
+// - PLEASE NOTE: to generate a mesh from a zsphere model, one would normally use the adaptive skin function. We have found that users should choose the "Use Classic Skinning" option in the Adaptive skin settings, otherwise ZBrush may crash.
+
+// If you use this script, please consider posting the results of your work in the ZBrush forums at: http://www.zbrushcentral.com/zbcinfinite.php
+
+// This software is open-source under the MIT License.
+
+// Copyright (c) 2017 Marcus Burgess & Nick Woolridge 
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this
+// software and associated documentation files (the "Software"), to deal in the Software
+// without restriction, including without limitation the rights to use, copy, modify, merge,
+// publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+// to whom the Software is furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+// FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+
+
+[VarDef,memIndex,0]
+[VarDef,maxValue,0]
+[VarDef,minValue,0]
+
+[RoutineDef,ProcessLine,
+	//create or resize memblock to store values
+	//memblock stores floats in groups of ten for simplicity (last 3 values not used)
+	[If,[MemGetSize,SWC_ValuesMem],
+		[VarSet,memIndex,([MemGetSize,SWC_ValuesMem]/4)]
+		[MemResize,SWC_ValuesMem,[MemGetSize,SWC_ValuesMem]+40,0]
+		,
+		[MemCreate,SWC_ValuesMem,40,0]
+		[VarSet,memIndex,0]
+	]	
+	[VarDef,value,0]
+	[VarDef,sStr,""]
+	[VarDef,tokenOffset(20),0]
+	[VarSet,i,0]
+	//get token offsets from string
+	[Loop,[StrLength,pStr],
+		//extract single character
+		[VarSet,char,[StrExtract,pStr,[Val,n],[Val,n]]]	
+		[If,[StrToAsc,char] == 32,//space
+			[VarSet,tokenOffset(i),[Val,n]]
+			[VarInc,i]
+		]
+	,n]
+	//set last to end of string
+	[VarSet,tokenOffset(i),[StrLength,pStr]-1]
+	[VarSet,offst,0]
+	[VarSet,valNo,0]//number of values stored
+	//extract values from string & store in memblock
+	[Loop,i+1,		
+		[VarSet,sStr,[StrExtract,pStr,offst,tokenOffset(n)]]
+		//[If,(([StrToAsc,[StrExtract,sStr,0,0]] != 32)&&([StrLength,sStr]!=1)),//if not a space
+		[If,(([StrToAsc,[StrExtract,sStr,0,0]] != 32)),//if not a space
+			//cast to float	
+			[VarSet,value,sStr]
+			[MVarSet,SWC_ValuesMem,memIndex,value]
+			// test for maximum and minimum dimensions, to set approp. scale
+			[If,(([Val,n]>=3)&&([Val,n]<=5)),
+				[If,value > maxValue,[VarSet,maxValue,value]]
+				[If,value < minValue,[VarSet,minValue,value]]
+			]
+			[VarInc,memIndex]
+			[VarInc,valNo]
+			[If,valNo >= 10, [LoopExit]]//only memory allocated to store ten values	
+		]
+		[VarSet,offst,tokenOffset(n)+1]			
+	,n]
+,pStr]//end routine
+
+
+[IButton,Import_Neuromorpho_SWC_File,"Read a TXT or SWC file",
+	[VarSet,txtStr,""]
+	[VarSet,offset,0]
+	[VarSet,bytesRead,0]
+	[VarSet,lineNo,0]
+	[VarSet,commentNo,0]
+	//define data variables from swc file
+	[VarDef, swcIndex, 0]
+	[VarDef, swcStructure, 0]
+	[VarDef, swcXPos, 0]
+	[VarDef, swcYPos, 0]
+	[VarDef, swcZPos, 0]
+	[VarDef, swcRad, 0]
+	[VarDef, swcParent, 0]
+	[VarSet,maxValue,0]
+	[VarSet,minValue,0]
+	//make sure memblocks aren't around
+	[MemDelete,SWC_TextMem]
+	[MemDelete,SWC_ValuesMem]
+	//choose a file
+	[VarSet,filePath,[FileNameAsk,"TXT(*.txt)|*.TXT|SWC(*.swc)|*.SWC||",,"Please Select File..."]]	
+	[If,[StrLength,filePath],
+		[MemCreateFromFile,SWC_TextMem,filePath]
+		[VarSet,memSize,[MemGetSize,SWC_TextMem]]
+		[Loop,15000,//loop large enough for whole file, originally 10000, increased to 15000 to accomodate larger SWC files
+			[If,offset < (memSize-1),
+				[VarSet,bytesRead,[MemReadString,SWC_TextMem,txtStr,offset,1]]				
+				[If,[StrLength,txtStr],
+					[VarInc,lineNo]
+					[If,([StrToAsc,[StrExtract,txtStr,0,0]] == 35), //hash #
+						[VarInc,commentNo]
+						,
+						[RoutineCall,ProcessLine,txtStr]
+					]	
+				]
+				[VarSet,offset,offset + bytesRead]
+				,
+				[LoopExit]
+			]
+		]//end loop
+		[Note,[StrMerge,"\Cff9923Total lines = \Cffffff",lineNo, "\Cff9923 of which comments = \Cffffff", commentNo],,3]
+
+		//soft code scaleFactor based on maximum and minimum scale factors
+		//[VarSet,scaleFactor, 1/((maxValue-minValue)/30)]
+
+		//hard code scaleFactor 
+		[VarSet,scaleFactor, 0.02]
+		//display scaleFactor in note for 3 seconds
+		[Note,[StrMerge,"\Cff9923scaleFactor = \Cffffff",scaleFactor],,3]
+		//delete memblock when no longer needed
+		[MemDelete,SWC_TextMem]
+		//Display results
+		[VarSet,index,0]
+		[VarDef,displayStr,""]
+		//add zshpere and switch to edit mode
+		[IPress,Tool:ZSphere]
+		[If,[IGet,Transform:Edit],,
+			[CanvasClick,100,100,100,200]
+			[IPress,Transform:Edit]
+		]
+		[VarSet,index,0]
+		[VarSet,loopNo,(lineNo-commentNo)]
+		//loop in which data variables extracted, and zspheres added
+		[IFreeze,
+			[Loop,loopNo,//loop for number of lines in the file
+				[VarSet,tmpOffset,index]
+				//set neuron scale and matrix variables for current line
+				[VarSet, swcIndex, [MVarGet,SWC_ValuesMem,index]]
+				[VarSet, swcStructure, [MVarGet,SWC_ValuesMem,index+1]]
+				[VarSet, swcXPos, [MVarGet,SWC_ValuesMem,index+2]*scaleFactor]
+				[VarSet, swcYPos, [MVarGet,SWC_ValuesMem,index+3]*scaleFactor]
+				[VarSet, swcZPos, [MVarGet,SWC_ValuesMem,index+4]*scaleFactor]
+				[VarSet, swcRad, [MVarGet,SWC_ValuesMem,index+5]*scaleFactor]
+				[VarSet, swcParent, [MVarGet,SWC_ValuesMem,index+6]]
+				//set current zsphere position
+				//for first (root) zsphere, set the position and radius
+				[If, index = 0,
+					[ZSphereEdit, [ZSphereSet, 1, 0, swcXPos], 1]
+					[ZSphereEdit, [ZSphereSet, 2, 0, swcYPos], 1]
+					[ZSphereEdit, [ZSphereSet, 3, 0, swcZPos], 1]
+					[ZSphereEdit, [ZSphereSet, 4, 0, swcRad], 1]
+				, 
+					//for all other zspheres set position and correct parent
+					[ZSphereEdit, [ZSphereAdd, swcXPos, swcYPos, swcZPos, swcRad, swcParent-1]]
+					[VarInc,zifNo]
+				] //end of "if root" 
+				[VarSet,index,tmpOffset+10]
+				[NoteBar,"Processing SWC file, please wait...",n/loopNo]		
+			,n]
+			[IPress,Transform:Fit]
+		]		
+	[NoteBar,""]
+	//clean up redundant soma zspheres
+	[ZSphereEdit,
+		[ZSphereDel, 1]
+		[ZSphereDel, 2]
+	, 1]
+	//delete memblock when no longer needed
+	[MemDelete,SWC_ValuesMem]		
+	]//if file path
+]//end button
+
