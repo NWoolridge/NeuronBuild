@@ -45,7 +45,7 @@ New in 1.4:
 Graham was here on April 6 at 9:49pm PST
 He stopped by again at 10:58pm to commit a second node on the uPy branch
 
-##NeuronBold ZBrush
+##NeuronBuild ZBrush
 The current version is 1.2.
 
 NeuronBuild ZBrush | 2017 Nicholas Woolridge & Marcus Burgess | n.woolridge@utoronto.ca
@@ -57,5 +57,6 @@ How to use:
 - A button called "Import_Neuromorpho_SWC_File" will appear in the tutorial palette; the tutorial palette is just below the viewport. Drag the divider up to see the button.
 - Depending upon the complexity and size of the file, parsing the file can take some time; a note will appear indicating the number of lines in the file, then the zsphere construction will occur. It may appear that ZBrush has frozen, but be patient.
 - PLEASE NOTE: to generate a mesh from a zsphere model, one would normally use the adaptive skin function. We have found that users should choose the "Use Classic Skinning" option in the Adaptive skin settings, otherwise ZBrush may crash.
+- ALSO NOTE: the scale of the models produced in Neuronbuild ZBrush is currently set to 1/50 the size of the models produced by the NeuronBuild C4D script. This is due to scale limitations within ZBrush. To have the models from each script match in terms of relative dimensions, scale a model produced by Neuronbuild ZBrush by 50x in C4D or other apps.
 
 If you use this script, please consider posting the results of your work in the ZBrush forums at: http://www.zbrushcentral.com/zbcinfinite.php
