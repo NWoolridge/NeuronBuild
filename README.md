@@ -55,8 +55,10 @@ Many thanks to Marcus Burgess, moderator at the ZBrush ZScipting Help Forum, who
 Version date: March 2017
 
 How to use:
+- Obtaining neuron morphology files: go to http://neuromorpho.org and find and download a neuron file you are interested in. These will usually have the ".swc" or ".txt" file extension; either is fine.
 - In ZBrush, use Menus > ZScript > Load; navigate your file system to find the script file, select it, and click on "Open"
 - A button called "Import_Neuromorpho_SWC_File" will appear in the tutorial palette; the tutorial palette is just below the viewport. Drag the divider up to see the button.
+- Click on the "Import_Neuromorpho_SWC_File" button, and choose the neuron morphology file you downloaded earlier.
 - Depending upon the complexity and size of the file, parsing the file can take some time; a note will appear indicating the number of lines in the file, then the zsphere construction will occur. It may appear that ZBrush has frozen, but be patient.
 - PLEASE NOTE: to generate a mesh from a zsphere model, one would normally use the adaptive skin function. We have found that users should choose the "Use Classic Skinning" option in the Adaptive skin settings, otherwise ZBrush may crash.
 - ALSO NOTE: the scale of the models produced in Neuronbuild ZBrush is currently set to 1/50 the size of the models produced by the NeuronBuild C4D script. This is due to scale limitations within ZBrush. To have the models from each script match in terms of relative dimensions, scale a model produced by Neuronbuild ZBrush by 50x in C4D or other apps.
