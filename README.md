@@ -50,7 +50,9 @@ The current version is 1.2.
 
 NeuronBuild ZBrush | 2017 Nicholas Woolridge & Marcus Burgess | n.woolridge@utoronto.ca
 
-version date: March 2017
+Many thanks to Marcus Burgess, moderator at the ZBrush ZScipting Help Forum, who was extremely helpful in understanding how to do just about everything this script does!
+
+Version date: March 2017
 
 How to use:
 - In ZBrush, use Menus > ZScript > Load; navigate your file system to find the script file, select it, and click on "Open"
