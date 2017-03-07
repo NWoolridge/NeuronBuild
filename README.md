@@ -48,6 +48,7 @@ He stopped by again at 10:58pm to commit a second node on the uPy branch
 
 ##NeuronBuild ZBrush
 https://github.com/NWoolridge/NeuronBuild
+
 The current version is 1.2.
 
 NeuronBuild ZBrush | 2017 Nicholas Woolridge & Marcus Burgess | n.woolridge@utoronto.ca
