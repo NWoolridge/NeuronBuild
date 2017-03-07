@@ -1,44 +1,25 @@
-// NeuronBuild | | 2017 Nicholas Woolridge & Marcus Burgess | n.woolridge@utoronto.ca
-// version date: March 2017
-// A script to import swc files downloaded from neuromorpho.org, and create accurate
-// zsphere-based models of neuronal structure in ZBrush. 
+// NeuronBuild ZBrush
 
-// The original swc file format is detailed here:
-// Cannon, R.C, Turner, D.A, Pyapali, G.K, Wheal, H.V. An on-line archive of reconstructed
-// hippocampal neurons. Journal of Neuroscience Methods. 84 1–2. pp 49-54. 1998
-// The reconstruction units are μm (micrometers).
-// Note: soma (cell body) definitions vary from file to file; this script assumes a three point
-// spline (which is very common).
-// Note: use of neuromorpho files may come with an obligation to cite the original publication.
+// https://github.com/NWoolridge/NeuronBuild
+
+// The current version is 1.2.
+
+// NeuronBuild ZBrush | 2017 Nicholas Woolridge & Marcus Burgess | n.woolridge@utoronto.ca
+
+// Many thanks to Marcus Burgess, moderator at the ZBrush ZScipting Help Forum, who was extremely helpful in understanding how to do just about everything this script does!
+
+// Version date: March 2017
 
 // How to use:
+
+// - Obtaining neuron morphology files: go to http://neuromorpho.org and find and download a neuron file you are interested in. These will usually have the ".swc" or ".txt" file extension; either is fine.
 // - In ZBrush, use Menus > ZScript > Load; navigate your file system to find the script file, select it, and click on "Open"
-// - A button called "Import_Neuromorpho_SWC_File" will appear in the tutorial palette; the 
-// tutorial palette is just below the viewport. Drag the divider up to see the button.
+// - A button called "Import_Neuromorpho_SWC_File" will appear in the tutorial palette; the tutorial palette is just below the viewport. Drag the divider up to see the button.
+// - Click on the "Import_Neuromorpho_SWC_File" button, and choose the neuron morphology file you downloaded earlier.
 // - Depending upon the complexity and size of the file, parsing the file can take some time; a note will appear indicating the number of lines in the file, then the zsphere construction will occur. It may appear that ZBrush has frozen, but be patient.
 // - PLEASE NOTE: to generate a mesh from a zsphere model, one would normally use the adaptive skin function. We have found that users should choose the "Use Classic Skinning" option in the Adaptive skin settings, otherwise ZBrush may crash.
-
+// - ALSO NOTE: the scale of the models produced in Neuronbuild ZBrush is currently set to 1/50 the size of the models produced by the NeuronBuild C4D script. This is due to scale limitations within ZBrush. To have the models from each script match in terms of relative dimensions, scale a model produced by Neuronbuild ZBrush by 50x in C4D or other apps.
 // If you use this script, please consider posting the results of your work in the ZBrush forums at: http://www.zbrushcentral.com/zbcinfinite.php
-
-// This software is open-source under the MIT License.
-
-// Copyright (c) 2017 Marcus Burgess & Nick Woolridge 
-
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this
-// software and associated documentation files (the "Software"), to deal in the Software
-// without restriction, including without limitation the rights to use, copy, modify, merge,
-// publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
-// to whom the Software is furnished to do so, subject to the following conditions:
-
-// The above copyright notice and this permission notice shall be included in all copies or
-// substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
-// FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-// DEALINGS IN THE SOFTWARE.
 
 
 [VarDef,memIndex,0]
@@ -195,4 +176,3 @@
 	[MemDelete,SWC_ValuesMem]		
 	]//if file path
 ]//end button
-
