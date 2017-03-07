@@ -6,6 +6,8 @@ Scripts to import neuron morphology data (from neuromorpho.org) into Cinema 4D a
 ##NeuronBuild  C4D
 https://github.com/NWoolridge/NeuronBuild
 
+Watch a video on using this script: https://vimeo.com/207323665
+
 The current working version is 1.5. Version 1.6 is experimental, and not yet fully functional.
 
 NeuronBuild C4D | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
@@ -55,6 +57,8 @@ The current version is 1.2.
 NeuronBuild ZBrush | 2017 Nicholas Woolridge & Marcus Burgess | n.woolridge@utoronto.ca
 
 Many thanks to Marcus Burgess, moderator at the ZBrush ZScipting Help Forum, who was extremely helpful in understanding how to do just about everything this script does!
+
+Watch a video on using this script: https://vimeo.com/207323832
 
 Version date: March 2017
 
