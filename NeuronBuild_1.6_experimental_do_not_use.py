@@ -1,6 +1,11 @@
 """
 NeuronBuild | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
 version date: March 11 2013
+
+----
+THIS VERSION IS EXPERIMENTAL, AND WILL NOT CURRENTLY WORK WITH C4D
+----
+
 A script to import swc files downloaded from neuromorpho.org, and create accurate
 spline-based models of neuronal structure. The original swc file format is detailed here:
 Cannon, R.C, Turner, D.A, Pyapali, G.K, Wheal, H.V. An on-line archive of reconstructed
