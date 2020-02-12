@@ -12,7 +12,7 @@ The current working version is 1.8.
 (Note: Version 1.6 was experimental, and not fully functional.)
 
 NeuronBuild C4D | Nick Woolridge | 2013-2020 | n.woolridge@utoronto.ca
-Version date: March 2013
+Version date: February 2020
 
 A script to import swc files downloaded from neuromorpho.org, and create accurate
 spline-based and/or polygonal models of neuronal structure. To download structure files, and to find out more about neuromorpho and its file format, please go to:
