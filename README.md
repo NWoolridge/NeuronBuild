@@ -8,9 +8,9 @@ https://github.com/NWoolridge/NeuronBuild
 
 Watch a video on using this script: https://vimeo.com/207323665
 
-The current working version is 1.5. Version 1.6 is experimental, and not yet fully functional.
+The current working version is 1.8. Version 1.6 is experimental, and not yet fully functional.
 
-NeuronBuild C4D | Nick Woolridge | 2013 | n.woolridge@utoronto.ca
+NeuronBuild C4D | Nick Woolridge | 2013-2020 | n.woolridge@utoronto.ca
 Version date: March 2013
 
 A script to import swc files downloaded from neuromorpho.org, and create accurate
@@ -32,19 +32,28 @@ How to use:
 - An import options dialog should appear; choose options for imported geometry, and click "Import File".
 - In the open file dialog, choose the swc file and click "OK".
 - A neuron should appear in your viewport.
-- If all the geometry options are chosen, the geometry consists of a HyperNURBs object, which contains a Connect object, which 
-contains a null object, which contains the sweep objects that define the axons and dendrites. 
+- If all the geometry options are chosen, the geometry consists of a HyperNURBs object, which contains a Connect object, which contains a null object, which contains the sweep objects that define the axons and dendrites. 
 Since the Soma (cell body) definition in the swc files is so rudimentary, you may want to 
 delete or hide it, and let the soma be defined by the merging dendrite roots. Within the sweep
- objects are n-sided splines (named "Profile") set to 6-sides; you could search for these 
- objects and change the number of sides to 4 to simplify the geometry. Also in the SweepNURBs objects
- are the splines that define the dendrite paths, and rail splines that define their radius.
+objects are n-sided splines (named "Profile") set to 6-sides; you could search for these 
+objects and change the number of sides to 4 to simplify the geometry. Also in the SweepNURBs objects
+are the splines that define the dendrite paths, and rail splines that define their radius.
     
-New in 1.4:
-    Modifications made by Graham Johnson on March 11, 2013
-    – support for Cinema 4D r12 and r13 (Oconnect and AddMultiLineEditText compatibility
-    – convert right handed .swc data to Cinema 4D left-handed with coordSystem test
-    – added safety test if user hits cancel button while in the system browser. Reports as 'Cancelled in Browser.'
+Version History
+1.8     Added options (disabled by default) to insert the model hierarchy in a Volume builder and Volume mesher object,
+        yeilding a single mesh. Adjust the Voxel dimension in the volume builder to adjust resolution. Be careful not
+        to make the resolution too low, since this can potentially generate large poly counts.
+        Added support for other SWC entities. Removed R12, R13 compatibility.
+1.7:    Added support for glial processes (ID 7 in neuromorpho's version of the SWC file format).
+        This means that astrocytes are now supported (unreleased)
+1.6:    Incomplete conversion to Upy framework; do not use.
+1.5:    Stable version for C4D R13-R21
+1.4:    Modifications made by Graham Johnson on March 11, 2013
+        – support for Cinema 4D r12 and r13 (Oconnect and AddMultiLineEditText compatibility
+        – convert right handed .swc data to Cinema 4D left-handed with coordSystem test
+        – added safety test if user hits cancel button while in the system browser. Reports as 'Cancelled in Browser.'
+
+This software is open-source under the MIT License.
 
 Graham was here on April 6 at 9:49pm PST
 He stopped by again at 10:58pm to commit a second node on the uPy branch
