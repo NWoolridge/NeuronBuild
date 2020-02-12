@@ -18,6 +18,7 @@ A script to import swc files downloaded from neuromorpho.org, and create accurat
 spline-based and/or polygonal models of neuronal structure. The original swc file format is detailed here:
 
 www.neuromorpho.org
+
 Ascoli GA, Donohue DE, Halavi M. (2007) NeuroMorpho.Org: a central resource for neuronal morphologies.J Neurosci., 27(35):9247-51
 
 
