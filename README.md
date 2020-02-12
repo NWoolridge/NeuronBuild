@@ -3,7 +3,7 @@ NeuronBuild
 
 Scripts to import neuron morphology data (from neuromorpho.org) into Cinema 4D and ZBrush.
 
-##NeuronBuild  C4D
+## NeuronBuild  C4D
 https://github.com/NWoolridge/NeuronBuild
 
 Watch a video on using this script: https://vimeo.com/207323665
@@ -40,7 +40,7 @@ objects and change the number of sides to 4 to simplify the geometry. Also in th
 are the splines that define the dendrite paths, and rail splines that define their radius.
     
 Version History
-- 1.8     Added options (disabled by default) to insert the model hierarchy in a Volume builder and Volume mesher object,
+- 1.8:  Added options (disabled by default) to insert the model hierarchy in a Volume builder and Volume mesher object,
         yeilding a single mesh. Adjust the Voxel dimension in the volume builder to adjust resolution. Be careful not
         to make the resolution too low, since this can potentially generate large poly counts.
         Added support for other SWC entities. Removed R12, R13 compatibility.
@@ -55,10 +55,7 @@ Version History
 
 This software is open-source under the MIT License.
 
-Graham was here on April 6 at 9:49pm PST
-He stopped by again at 10:58pm to commit a second node on the uPy branch
-
-##NeuronBuild ZBrush
+## NeuronBuild ZBrush
 https://github.com/NWoolridge/NeuronBuild
 
 The current version is 1.2.
