@@ -8,7 +8,8 @@ https://github.com/NWoolridge/NeuronBuild
 
 Watch a video on using this script: https://vimeo.com/207323665
 
-The current working version is 1.8. Version 1.6 is experimental, and not yet fully functional.
+The current working version is 1.8. 
+(Note: Version 1.6 was experimental, and not fully functional.)
 
 NeuronBuild C4D | Nick Woolridge | 2013-2020 | n.woolridge@utoronto.ca
 Version date: March 2013
