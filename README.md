@@ -15,17 +15,20 @@ NeuronBuild C4D | Nick Woolridge | 2013-2020 | n.woolridge@utoronto.ca
 Version date: March 2013
 
 A script to import swc files downloaded from neuromorpho.org, and create accurate
-spline-based and/or polygonal models of neuronal structure. The original swc file format is detailed here:
+spline-based and/or polygonal models of neuronal structure. To download structure files, and to find out more about neuromorpho and its file format, please go to:
 
 www.neuromorpho.org
 
 Ascoli GA, Donohue DE, Halavi M. (2007) NeuroMorpho.Org: a central resource for neuronal morphologies.J Neurosci., 27(35):9247-51
 
+Many thanks to the thousands of researchers and students who have populated the neuromorpho repository.
 
-The reconstruction units are μm (micrometers).
+### Notes on using NeuronBuild
+The reconstruction units are μm (micrometers). In C4D these correspond to the world units defined in your project settings.
+
 Note: soma (cell body) definitions vary from file to file; this script assumes a three point spline
-(which is very common). The soma object is disabled by default, since they rarely produce acceptable geometry.
-Note: use of neuromorpho files may come with an obligation to cite the original publication.
+(which is very common). The soma object is disabled by default, since they rarely produce acceptable geometry; the soma can be re-enabled by digging into the hierarchy.
+Note: use of neuromorpho files comes with an obligation to cite neuromorpho.org and the original publication; see [here](http://neuromorpho.org/useterm.jsp)
 
 How to use:
 - add to your C4D scripts folder (on Mac OS X: Applications/MAXON/CINEMA 4D R14/library/scripts or in the user prefs folder)
