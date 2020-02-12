@@ -1,6 +1,8 @@
 NeuronBuild
 ==========
 
+![NeuronBuild_Pyramid-IIIC-2-5M-10_CU](https://user-images.githubusercontent.com/3877995/74296135-03b1fb00-4d11-11ea-9286-e33f76ac8e5c.jpg)
+
 Scripts to import neuron morphology data (from neuromorpho.org) into Cinema 4D and ZBrush.
 
 ## NeuronBuild  C4D
