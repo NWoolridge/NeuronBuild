@@ -10,7 +10,7 @@ https://github.com/NWoolridge/NeuronBuild
 
 Watch a video on using this script: https://vimeo.com/207323665
 
-**Note:** I will be adding a new video to go over the new features.
+Watch a video on the new features: https://vimeo.com/391015129
 
 The current working version is 1.8. 
 (Note: Version 1.6 was experimental, and not fully functional.)
