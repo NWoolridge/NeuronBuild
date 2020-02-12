@@ -28,24 +28,30 @@ The reconstruction units are μm (micrometers). In C4D these correspond to the w
 
 Note: soma (cell body) definitions vary from file to file; this script assumes a three point spline
 (which is very common). The soma object is disabled by default, since they rarely produce acceptable geometry; the soma can be re-enabled by digging into the hierarchy.
-Note: use of neuromorpho files comes with an obligation to cite neuromorpho.org and the original publication; see [here](http://neuromorpho.org/useterm.jsp)
+Note: use of neuromorpho files comes with an obligation to cite neuromorpho.org and the original publication; see [here](http://neuromorpho.org/useterm.jsp).
 
 How to use:
-- add to your C4D scripts folder (on Mac OS X: Applications/MAXON/CINEMA 4D R14/library/scripts or in the user prefs folder)
+- add to your C4D **Scripts** folder (find the user prefs folder via C4D's Preferences dialog; the **Scripts** folder is within the **Library** folder)
 - Browse and download a .swc or .swc.txt file from http://neuromorpho.org/
-- Open the script manager in C4D, the script should be in the pop-up menu at the top of the window.
-- In the Script manager in C4D load the NeuronBuild script and click "Execute".
+- Open the **Script Manager** in C4D, the script should be in the pop-up menu at the top of the window.
+- In the **Script Manager** in C4D load the NeuronBuild script and click "Execute".
 - An import options dialog should appear; choose options for imported geometry, and click "Import File".
 - In the open file dialog, choose the swc file and click "OK".
 - A neuron should appear in your viewport.
 - If all the geometry options are chosen, the geometry consists of a HyperNURBs object, which contains a Connect object, which contains a null object, which contains the sweep objects that define the axons and dendrites. 
 Since the Soma (cell body) definition in the swc files is so rudimentary, you may want to 
-delete or hide it, and let the soma be defined by the merging dendrite roots. Within the sweep
-objects are n-sided splines (named "Profile") set to 6-sides; you could search for these 
+delete or hide it, and let the soma be defined by the merging dendrite roots.
+
+Within the sweep objects are n-sided splines (named "Profile") set to 6-sides; you could search for these 
 objects and change the number of sides to 4 to simplify the geometry. Also in the SweepNURBs objects
 are the splines that define the dendrite paths, and rail splines that define their radius.
+
+The new volume builder and volume mesher objects allow for the creation of a single, optimized mesh. The resolution
+of the mesh is set by the Voxel Size setting in the volume builder object. If the default resolution is too low
+(which it almost ceratinly will be), gradually lower the Voxel Size until you have an acceptable result.
+**BE CAREFUL:** jumping immediately to a very low voxel size may generate an enormous number of polygons, which could potentially exhaust your system resources.
     
-Version History
+### Version History
 - 1.8:  Added options (disabled by default) to insert the model hierarchy in a Volume builder and Volume mesher object,
         yeilding a single mesh. Adjust the Voxel dimension in the volume builder to adjust resolution. Be careful not
         to make the resolution too low, since this can potentially generate large poly counts.
