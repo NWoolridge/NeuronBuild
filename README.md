@@ -56,6 +56,7 @@ of the mesh is set by the Voxel Size setting in the volume builder object. If th
 **BE CAREFUL:** jumping immediately to a very low voxel size may generate an enormous number of polygons, which could potentially exhaust your system resources.
     
 ### Version History
+- 1.9   Updated for Python 3.x and Cinema4D R24 compatability ("print" statement parentheses added).
 - 1.8:  Added options (disabled by default) to insert the model hierarchy in a Volume builder and Volume mesher object,
         yeilding a single mesh. Adjust the Voxel dimension in the volume builder to adjust resolution. Be careful not
         to make the resolution too low, since this can potentially generate large poly counts.
